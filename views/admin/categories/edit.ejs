@@ -1,0 +1,54 @@
+<%-include('../../partials/header.ejs'); %>
+
+    <body>
+
+        <%-include('../../partials/navbar.ejs'); %>
+
+            <div class="container">
+                <hr>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Edição categoria:</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="/categories/update" class="needs-validation" novalidate>
+                            <input type="text" name="title" value="<%=Categories.title%>" placeholder="defina o tipo da categoria"
+                                class="form-control " required><br>
+                            <input type="hidden" name="id" value="<%=Categories.id%>">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                   insert the category
+                                </div>
+                            <button type="submit" class="btn btn-success">Atualizar</button>
+                        </form>
+                    </div>           
+                </div>
+            </div> 
+            
+            <script>
+                (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+            </script>
+
+    </body>
+
+    <%-include('../../partials/footer.ejs'); %>
