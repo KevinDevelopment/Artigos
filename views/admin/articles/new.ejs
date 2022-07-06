@@ -1,0 +1,61 @@
+<%-include('../../partials/header.ejs'); %>
+
+    <body>
+
+        <%-include('../../partials/navbar.ejs'); %>
+
+            <div class="container">
+                <hr>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Novo artigo:</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="/categories/save" class="needs-validation" novalidate>
+                            <input type="text" name="title" placeholder="defina o titulo do artigo "
+                                class="form-control " required><br>                           
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                   insert the category
+                                </div>
+
+                                <textarea class="form-control mb-4" name="body" id="" cols="30" rows="5" placeholder="Escreva o artigo aqui" required></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                   insert the category
+                                </div>
+                            <button type="submit" class="btn btn-success">Cadastrar</button>
+                        </form>
+                    </div>           
+                </div>
+            </div> 
+            
+            <script>
+                (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+            </script>
+
+    </body>
+
+    <%-include('../../partials/footer.ejs'); %>

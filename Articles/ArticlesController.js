@@ -6,7 +6,7 @@ router.get("/articles", (request, response) => {
 });
 
 router.get("/admin/articles/new", (request, response) => {
-    response.send("minha nova rota de articles")
+    response.render("admin/articles/new")
 });
 
 module.exports = router;
