@@ -11,7 +11,7 @@
                         <h2>Novo artigo:</h2>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="/categories/save" class="needs-validation" novalidate>
+                        <form method="post" action="/articles/save" z>
                             <input type="text" name="title" placeholder="defina o titulo do artigo "
                                 class="form-control " required><br>                           
                                 <div class="valid-feedback">
@@ -21,14 +21,23 @@
                                    insert the category
                                 </div>
 
-                                <textarea class="form-control mb-4" name="body" id="" cols="30" rows="5" placeholder="Escreva o artigo aqui" required></textarea>
+                                <textarea class="form-control mb-4" name="body" id="article" cols="30" rows="10" placeholder="Escreva o artigo aqui" required></textarea>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
                                 <div class="invalid-feedback">
                                    insert the category
                                 </div>
-                            <button type="submit" class="btn btn-success">Cadastrar</button>
+                                <label class="mt-4">Categoria:</label>
+                                <select name="categoria" class="form-control mt-4">
+                                    
+                                    <% Categories.forEach((item) => { %>
+                                        <option value="<%=item.id%>"><%=item.title%></option>
+
+                                   <% }) %>
+
+                                </select>
+                            <button type="submit" class="btn btn-success mt-4">Cadastrar</button>
                         </form>
                     </div>           
                 </div>
@@ -59,3 +68,26 @@
     </body>
 
     <%-include('../../partials/footer.ejs'); %>
+    <script src="/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            language: 'pt_BR',
+            selector: "#article",           
+            plugins: [
+                    'advlist',
+                    'autolink',
+                    'link',
+                    'image',
+                    'lists',
+                    'preview',
+                    'searchreplace',
+                    'wordcount',
+                    'fullscreen',
+                    'insertdatetime',
+                    'media',
+                    'save',
+                    'table',
+                    'emoticons',
+                ]
+        });
+    </script>
