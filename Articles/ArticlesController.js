@@ -90,4 +90,8 @@ router.get("/admin/articles/edit/:id", (request, response) => {
     })
 })
 
+router.get("/articles/page/:num", (request, response) => {
+    const { page } = request.params;
+})
+
 module.exports = router;

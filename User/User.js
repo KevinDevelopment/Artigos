@@ -1,22 +1,22 @@
 const Sequelize = require("sequelize");
 const connection = require("../database/database");
 
-const Categories = connection.define('categories', {
-    title: {
+const Users = connection.define('users', {
+    email: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    slug: {
+    password: {
         type: Sequelize.STRING,
         allowNull: false
     }
 });
 
-Categories.sync({force: false}).then(() => {
-    console.log("Tabela criada")
+Users.sync({force: false}).then(() => {
+    console.log("Tabela login criada")
 }).catch((erro) => {
     console.log(`${erro}`)
 });
 
 
-module.exports = Categories;
+module.exports = Users;

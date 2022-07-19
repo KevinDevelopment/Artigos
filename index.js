@@ -5,6 +5,8 @@ const articlecontroller = require("./Articles/ArticlesController");
 const connection = require("./database/database");
 const Categories = require("./Categories/Categories");
 const Articles = require("./Articles/Articles");
+const userscontroller = require("./User/UserController");
+const Users = require("./User/User");
 
 
 connection.authenticate().then(() => {
@@ -83,6 +85,7 @@ app.get("/categori/:slug", (request, response) => {
 
 app.use("/", categoriescontroller);
 app.use("/", articlecontroller);
+app.use("/", userscontroller);
 
 const PORT = 8080;
 app.listen(PORT, (request, response) => {

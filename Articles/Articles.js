@@ -18,8 +18,12 @@ const Articles = connection.define('articles', {
 });
 
 
-Categories.hasMany(Articles);
-Articles.belongsTo(Categories);
+// Categories.hasMany(Articles);
+// Articles.belongsTo(Categories);
 
-
+Articles.sync({force: false}).then(() => {
+    console.log("Tabela criada")
+}).catch((erro) => {
+    console.log(`${erro}`)
+});
 module.exports = Articles;
