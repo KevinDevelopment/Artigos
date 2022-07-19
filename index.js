@@ -19,7 +19,66 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
 app.get("/", (request, response) => {
-    response.render("index")
+
+    Articles.findAll({raw:true, order: [
+        ['id','DESC']
+    ]}).then((articles) => {
+
+        Categories.findAll().then((categories) => {
+            response.render("index", {
+                articles: articles,
+                categories: categories
+            })
+        })
+
+        
+    });
+
+   
+});
+
+app.get("/:slug", (request, response) => {
+    const { slug } = request.params;
+    Articles.findOne({
+        where: {
+            slug: slug
+        }
+    }).then((article) => {
+        if (article != undefined) {
+            Categories.findAll().then((categories) => {
+                response.render("article", {
+                    article: article,
+                    categories: categories
+                })
+            })
+        }
+        else {
+            response.redirect("/")
+        }
+    }).catch((erro) => {
+        response.redirect("/")
+    })
+});
+
+app.get("/categori/:slug", (request, response) => {
+    const { slug } = request.params;
+    Categories.findOne({
+        where: {
+            slug: slug
+        },
+        include: [{model: Articles}]
+    }).then((categori) => {
+        if (categori != undefined) {
+            Categories.findAll({raw:true}).then((categories) => {
+                response.render("index", {articles: categori.articles, categories: categories})
+            })
+        }
+        else {
+            response.redirect("/")
+        }
+    }).catch((erro) => {
+        response.redirect("/")
+    })
 });
 
 app.use("/", categoriescontroller);

@@ -1,12 +1,28 @@
 <%-include('partials/header.ejs'); %>
 <body>
 
-    <%-include('partials/navbar.ejs'); %>
+    <%-include('partials/homenavbar.ejs'); %>
    
 
     <div class="container">
-      <button class="btn btn-primary">Teste</button>
-        <h1>Minha view de teste</h1>
+      <div class="jumbotron">
+        <h1 class="display-4">Bem vindo </h1>
+        <p class="lead">Blog dos programadores</p>
+        <hr class="my-4">
+        <p>Seja um programador voce tambem</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      </div>
+      <hr>
+      <%articles.forEach((article) => {%>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h2><%=article.title%></h2>
+          </div>
+          <div class="card-body">
+            <a class="btn btn-success" href="<%=article.slug%>">Ler artigo</a>
+          </div>
+        </div>
+       <%}) %>     
     </div>
 
    

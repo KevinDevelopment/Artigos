@@ -1,0 +1,64 @@
+<%-include('../../partials/header.ejs'); %>
+<body>
+
+    <%-include('../../partials/navbar.ejs'); %>
+   
+
+    <div class="container">   
+        
+     
+
+      
+
+        
+        <h1>Articles</h1>
+        <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Slug</th>  
+                    <th>Category</th>                 
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+               <%articles.forEach((item) => {%>
+                <tr>
+                <td><%=item.id%></td>
+                <td><%=item.title%></td>
+                <td><%=item.slug%></td>  
+                <td><%=item.category.title%></td>                 
+                <td>
+                    <form method="post" action="/articles/delete" style="display: inline" onsubmit="confirmarExclusao(event, this)">
+                        <input type="hidden" name="id" value="<%=item.id%>">
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+               <%}) %>          
+            </tbody>
+        </table>    
+    </div>
+
+   
+   
+
+</body>
+<%-include('../../partials/footer.ejs'); %>
+<script>
+    function confirmarExclusao(event, form) {
+        event.preventDefault();
+        const decision = confirm("Deseja mesmo excluir, esta ação é irreversivel!");
+
+        if(decision) {
+            form.submit();
+        }
+        else {
+            console.log("nao apaguei")
+        }
+    }
+</script>
+

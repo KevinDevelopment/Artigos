@@ -5,35 +5,56 @@
         <%-include('../../partials/navbar.ejs'); %>
 
             <div class="container">
+                <% article.forEach((item) => { %>
                 <hr>
                 <div class="card">
                     <div class="card-header">
-                        <h2>Novo artigo:</h2>
+                        <h2>Editar artigo:</h2>
                     </div>
                     <div class="card-body">
                         <form method="post" action="/articles/save" >
                             <input type="text" name="title" placeholder="defina o titulo do artigo "
-                                class="form-control " required><br>                           
-                                
+                                class="form-control " value="<%=article.title%>" required><br>                           
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                   insert the category
+                                </div>
 
                                 <textarea class="form-control mb-4" name="body" id="article" cols="30" rows="10" placeholder="Escreva o artigo aqui" required></textarea>
-                                
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                   insert the category
+                                </div>
                                 <label class="mt-4">Categoria:</label>
                                 <select name="categoria" class="form-control mt-4">
                                     
                                     <% Categories.forEach((item) => { %>
-                                        <option value="<%=item.id%>"><%=item.title%></option>
+
+                                        <% if(category.id === article.categoryId) {%>
+                                            <option value="<%=item.id%>" selected><%=item.title%></option>
+
+                                        <%} else {%>
+                                            <option value="<%=item.id%>"><%=item.title%></option>
+
+                                        <%}%>
 
                                    <% }) %>
 
                                 </select>
-                            <button type="submit" class="btn btn-success mt-4">Cadastrar</button>
+                            <button type="submit" class="btn btn-success mt-4">Atualizar</button>
                         </form>
                     </div>           
                 </div>
+                <% }) %>
             </div> 
             
-           
+           <div class="content">
+                <%- article.body%>
+           </div>
 
     </body>
 
